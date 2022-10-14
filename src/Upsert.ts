@@ -9,7 +9,7 @@ export class SearchByKeys {
 
 export class UpsertOptions {
     skipUpdateIf?: ((client: OdooClient, current: BaseModel<any>) => boolean) | boolean;
-    searchDomains: Domains | SearchByKeys;
+    searchDomains?: Domains | SearchByKeys;
 }
 
 export class Upsert<TModel extends BaseModel<TModel>> {

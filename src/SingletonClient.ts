@@ -1,7 +1,7 @@
 import { IOdooClientSettings } from "./IOdooClientSettings";
 import { OdooClient } from "./OdooClient";
 
-let client: OdooClient = null;
+let client: OdooClient;
 
 export class SingletonClient {
     constructor() {
@@ -23,7 +23,7 @@ export class SingletonClient {
 
         if (options.username && options.password) {
             await new Promise((resolve, reject) => {
-                client.connect(options, (error, result) => {
+                client.connect(options, (error = {}, result = {}) => {
                     if (result) {
                         resolve(result);
                     } else {

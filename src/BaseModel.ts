@@ -1,5 +1,5 @@
 import { BaseModelFactory } from "./BaseModelFactory";
-import { modelNameToFilePathMap } from "../OdooModels/modelNameToFilePathMap";
+import modelNameToFilePathMap from "./OdooModels/modelNameToFilePathMap";
 import { ConstructableByAttributeObject, ObjectSimilarTo } from "./ConstructableByAttributeObject";
 
 export type TBaseModel<TModel> = {
@@ -18,7 +18,7 @@ export class BaseModel<TModel> extends ConstructableByAttributeObject<BaseModel<
     static async getModelByOdooModelName(modelName: string) {
         const { filePath, className } = modelNameToFilePathMap[modelName];
 
-        return (await import('../OdooModels/'+ filePath))[className];
+        return (await import('./OdooModels/'+ filePath))[className];
     }
 
     id?: number;

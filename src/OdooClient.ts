@@ -5,11 +5,17 @@ import { IReadCreatedObjectsOption } from "./BaseModelFactory";
 import { BaseModel } from "./BaseModel";
 import { ModelToRPCPayloadConverter } from "./ModelToRPCPayloadConverter";
 import { ModelReferenceSymbol, ReferenceQuantityMode } from "./ModelReference";
-import { ResUsers } from "../OdooModels/res/users";
-import { ExtendedConsole } from "../../log-with-location";
+import { ResUsers } from "./OdooModels/res/users";
+// import { ExtendedConsole } from "../../log-with-location";
+import { ExtendedConsole } from "./log-with-location";
+import 'reflect-metadata'
 
 export type TPreloadRelationshipOption = {
     [key: string]: TPreloadRelationshipOption
+}
+
+interface ErrorCallback extends Function {
+
 }
 
 // Forked from https://github.com/dennybiasiolli/odoo-xmlrpc/tree/babelize-all and refactored code then converted to TS
@@ -17,7 +23,7 @@ export class OdooClient {
     protected client: Client;
     protected uid: number;
     protected dbName: string;
-    protected password: string;
+    protected password?: string;
     protected modelToRPCPayloadConverter: ModelToRPCPayloadConverter;
 
     constructor(config: IOdooClientSettings) {
@@ -33,7 +39,7 @@ export class OdooClient {
         this.modelToRPCPayloadConverter = new ModelToRPCPayloadConverter(this);
     }
 
-    protected async createRPCMethodPromise(service, method, args = {}) {
+    protected async createRPCMethodPromise(service: string, method: string, args = {}) {
         return new Promise((resolve, reject) => {
             this.client.request({
                 method: "call",
@@ -74,7 +80,7 @@ export class OdooClient {
         });
     }
 
-    connect(loginCredential: IOdooClientSettings, callback) {
+    connect(loginCredential: IOdooClientSettings, callback: ErrorCallback) {
         this.password = loginCredential.password;
 
         this.createRPCMethodPromise('common', 'login', [this.dbName, loginCredential.username, this.password])
@@ -337,7 +343,7 @@ export class OdooClient {
         return data;
     }
 
-    protected getModelIds<TModel extends BaseModel<TModel>>(targets: TModel[]): number[] {
+    protected getModelIds<TModel extends BaseModel<TModel>>(targets: TModel[]): (number | undefined)[] {
         return targets.map(____ => ____.id);
     }
 }

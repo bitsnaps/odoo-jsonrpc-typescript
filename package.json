@@ -1,0 +1,30 @@
+{
+  "name": "odoo-jsonrpc-typescript",
+  "version": "1.0.0",
+  "description": "Works for both browser and node.js application",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsc --module commonjs && node dist/index.js",
+    "watch": "npx tsc --module commonjs --watch",
+    "clean": "rm -rf dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitsnaps/odoo-jsonrpc-typescript.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitsnaps/odoo-jsonrpc-typescript/issues"
+  },
+  "homepage": "https://github.com/bitsnaps/odoo-jsonrpc-typescript#readme",
+  "dependencies": {
+    "@open-rpc/client-js": "^1.7.1",
+    "@types/ws": "^8.5.3",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.5",
+    "reflect-metadata": "^0.1.13"
+  }
+}

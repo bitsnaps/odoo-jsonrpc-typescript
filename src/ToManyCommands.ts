@@ -5,11 +5,12 @@ export type FindOdooReference = number | Domains;
 
 // https://github.com/odoo/odoo/blob/14.0/odoo/models.py#L3540-L3561
 export class ToManyCommands {
-    commands = []
+    commands: any[] = []
+    
 
     // (0, 0, values)
     // adds a new record created from the provided value dict.
-    createAndAddValuesAsReference(values: any[]) {
+    createAndAddValuesAsReference(values: number[]) {
         values.forEach(value => this.commands.push([0, 0, value]));
 
         return this;

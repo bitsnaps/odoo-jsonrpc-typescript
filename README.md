@@ -189,3 +189,11 @@ const productTemplate: ProductTemplate = (
     })
 )[0] as ProductTemplate;
 ```
+
+## Installed packages:
+```bash
+npm install @open-rpc/client-js
+npm install @types/ws
+npm install reflect-metadata -D
+npm install @types/node -D
+```
